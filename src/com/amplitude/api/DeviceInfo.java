@@ -101,13 +101,13 @@ public class DeviceInfo {
         }
 
         private String getCarrier() {
-            try {
+            /*try {
                 TelephonyManager manager = (TelephonyManager) context
                         .getSystemService(Context.TELEPHONY_SERVICE);
                 return manager.getNetworkOperatorName();
             } catch (Exception e) {
                 // Failed to get network operator name from network
-            }
+            }*/
             return null;
         }
 
@@ -116,7 +116,7 @@ public class DeviceInfo {
 
             // Prioritize reverse geocode, but until we have a result from that,
             // we try to grab the country from the network, and finally the locale
-            String country = getCountryFromLocation();
+            /*String country = getCountryFromLocation();
             if (!Utils.isEmptyString(country)) {
                 return country;
             }
@@ -125,11 +125,12 @@ public class DeviceInfo {
             if (!Utils.isEmptyString(country)) {
                 return country;
             }
-            return getCountryFromLocale();
+            return getCountryFromLocale();*/
+        	return null;
         }
 
         private String getCountryFromLocation() {
-            if (!isLocationListening()) {
+            /*if (!isLocationListening()) {
                 return null;
             }
 
@@ -159,12 +160,12 @@ public class DeviceInfo {
                 } catch (IllegalStateException e) {
                     // sometimes the location manager is unavailable
                 }
-            }
+            }*/
             return null;
         }
 
         private String getCountryFromNetwork() {
-            try {
+            /*try {
                 TelephonyManager manager = (TelephonyManager) context
                         .getSystemService(Context.TELEPHONY_SERVICE);
                 if (manager.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA) {
@@ -175,12 +176,13 @@ public class DeviceInfo {
                 }
             } catch (Exception e) {
                 // Failed to get country from network
-            }
+            }*/
             return null;
         }
 
         private String getCountryFromLocale() {
-            return Locale.getDefault().getCountry();
+            //return Locale.getDefault().getCountry();
+        	return null;
         }
 
         private String getLanguage() {
@@ -189,24 +191,26 @@ public class DeviceInfo {
 
         private String getAdvertisingId() {
             // This should not be called on the main thread.
-            if ("Amazon".equals(getManufacturer())) {
+            /*if ("Amazon".equals(getManufacturer())) {
                 return getAndCacheAmazonAdvertisingId();
             } else {
                 return getAndCacheGoogleAdvertisingId();
-            }
+            }*/
+        	return null;
         }
 
         private String getAndCacheAmazonAdvertisingId() {
-            ContentResolver cr = context.getContentResolver();
+            /*ContentResolver cr = context.getContentResolver();
 
             limitAdTrackingEnabled = Secure.getInt(cr, SETTING_LIMIT_AD_TRACKING, 0) == 1;
             advertisingId = Secure.getString(cr, SETTING_ADVERTISING_ID);
 
-            return advertisingId;
+            return advertisingId;*/
+        	return null;
         }
 
         private String getAndCacheGoogleAdvertisingId() {
-            try {
+            /*try {
                 Class AdvertisingIdClient = Class
                         .forName("com.google.android.gms.ads.identifier.AdvertisingIdClient");
                 Method getAdvertisingInfo = AdvertisingIdClient.getMethod("getAdvertisingIdInfo",
@@ -228,12 +232,13 @@ public class DeviceInfo {
                 AmplitudeLog.getLogger().e(TAG, "Encountered an error connecting to Google Play Services", e);
             }
 
-            return advertisingId;
+            return advertisingId;*/
+        	return null;
         }
 
         private boolean checkGPSEnabled() {
             // This should not be called on the main thread.
-            try {
+            /*try {
                 Class GPSUtil = Class
                         .forName("com.google.android.gms.common.GooglePlayServicesUtil");
                 Method getGPSAvailable = GPSUtil.getMethod("isGooglePlayServicesAvailable",
@@ -254,7 +259,7 @@ public class DeviceInfo {
             } catch (Exception e) {
                 AmplitudeLog.getLogger().w(TAG,
                         "Error when checking for Google Play Services: " + e);
-            }
+            }*/
             return false;
         }
     }
@@ -303,11 +308,13 @@ public class DeviceInfo {
     }
 
     public String getCarrier() {
-        return getCachedInfo().carrier;
+        /*return getCachedInfo().carrier;*/
+    	return null;
     }
 
     public String getCountry() {
-        return getCachedInfo().country;
+        /*return getCachedInfo().country;*/
+    	return null;
     }
 
     public String getLanguage() {
@@ -315,7 +322,8 @@ public class DeviceInfo {
     }
 
     public String getAdvertisingId() {
-        return getCachedInfo().advertisingId;
+        /*return getCachedInfo().advertisingId;*/
+    	return null;
     }
 
     public boolean isLimitAdTrackingEnabled() {
@@ -325,7 +333,7 @@ public class DeviceInfo {
     public boolean isGooglePlayServicesEnabled() { return getCachedInfo().gpsEnabled; }
 
     public Location getMostRecentLocation() {
-        if (!isLocationListening()) {
+        /*if (!isLocationListening()) {
             return null;
         }
 
@@ -373,11 +381,12 @@ public class DeviceInfo {
             }
         }
 
-        return bestLocation;
+        return bestLocation;*/
+    	return null;
     }
 
     public boolean isLocationListening() {
-        return locationListening;
+        return false;
     }
 
     public void setLocationListening(boolean locationListening) {
